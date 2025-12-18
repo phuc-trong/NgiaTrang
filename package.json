@@ -1,0 +1,17 @@
+{
+  "name": "java1-login-page",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "live-server --port=3000 --entry-file=login.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

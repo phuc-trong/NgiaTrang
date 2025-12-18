@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  /* Dùng ảnh làm background */
+  background-image: url("../assets/images.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Overlay nhẹ để nội dung dễ đọc hơn trên ảnh */
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lớp phủ mờ trên background để chữ dễ nhìn hơn */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(78, 84, 200, 0.4), rgba(143, 148, 251, 0.4));
+  z-index: -1;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333333;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4e54c8;
+  box-shadow: 0 0 0 2px rgba(78, 84, 200, 0.2);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4e54c8;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: #3d43a6;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #666666;
+}
+
+.login-footer a {
+  color: #4e54c8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
