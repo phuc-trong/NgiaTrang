@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="login-wrapper">
+    <form class="login-card" id="registerForm">
+      <h1 class="login-title">Đăng ký</h1>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="nhapemail@gmail.com"
+          pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+          title="Vui lòng nhập email có đuôi @gmail.com"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="fullname">Họ và tên</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          placeholder="Nhập họ và tên"
+          pattern="^([A-ZÀ-Ỵ][a-zà-ỹ]+)(\s[A-ZÀ-Ỵ][a-zà-ỹ]+)*$"
+          title="Mỗi chữ cái đầu của mỗi từ phải viết hoa và chỉ được chứa chữ cái, khoảng trắng (không có số)"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Nhập mật khẩu"
+          pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{1,8}$"
+          title="Mật khẩu tối đa 8 ký tự, phải gồm chữ và số, trong đó có ít nhất 1 chữ in hoa"
+          required>
+      </div>
+
+      <div class="form-group gender-row">
+        <label>Giới tính</label>
+        <div class="gender-group">
+          <label>
+            <input type="radio" name="gender" value="male" required>
+            Nam
+          </label>
+          <label>
+            <input type="radio" name="gender" value="female">
+            Nữ
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Ngày sinh</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+
+      <button type="submit" class="btn-primary">Đăng ký</button>
+
+      <p class="login-footer">
+        Đã có tài khoản?
+        <a href="login.html">Đăng nhập</a>
+      </p>
+    </form>
+  </div>
+
+  <div id="successPopup" class="popup-overlay" style="display: none;">
+    <div class="popup-content">
+      <h2>Đăng ký thành công</h2>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const popup = document.getElementById('successPopup');
+
+    form.addEventListener('submit', function (e) {
+      // Nếu form không hợp lệ, để trình duyệt tự hiển thị lỗi
+      if (!form.checkValidity()) {
+        return;
+      }
+      e.preventDefault();
+      popup.style.display = 'flex';
+
+      // Sau khi hiện popup 2 giây thì tự động quay về trang đăng nhập
+      setTimeout(function () {
+        window.location.href = 'login.html';
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
+
+
