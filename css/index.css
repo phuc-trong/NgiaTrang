@@ -52,6 +52,10 @@ body::before {
   margin-bottom: 16px;
 }
 
+.password-group .input-wrapper {
+  position: relative;
+}
+
 .form-group label {
   display: block;
   margin-bottom: 6px;
@@ -74,6 +78,50 @@ body::before {
   box-shadow: 0 0 0 2px rgba(78, 84, 200, 0.2);
 }
 
+.password-group input {
+  padding-right: 70px;
+}
+
+.input-wrapper .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-wrapper .toggle-password:focus-visible {
+  outline: 2px solid rgba(78, 84, 200, 0.6);
+  outline-offset: 2px;
+}
+
+.toggle-password .eye {
+  width: 20px;
+  height: 20px;
+  fill: #4e54c8;
+  transition: opacity 0.15s ease;
+}
+
+.toggle-password .eye-closed {
+  display: none;
+}
+
+.toggle-password.is-visible .eye-open {
+  display: none;
+}
+
+.toggle-password.is-visible .eye-closed {
+  display: block;
+}
+
 .btn-primary {
   width: 100%;
   padding: 10px 12px;
@@ -94,6 +142,124 @@ body::before {
 
 .btn-primary:active {
   transform: translateY(1px);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.btn-secondary:hover {
+  border-color: #4e54c8;
+  box-shadow: 0 0 0 2px rgba(78, 84, 200, 0.2);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10;
+}
+
+.modal-backdrop.show {
+  display: flex;
+}
+
+.modal-dialog {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.modal-sub {
+  margin: 6px 0 16px;
+  color: #555555;
+  font-size: 14px;
+}
+
+.tab-list {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab-list .tab {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333333;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.tab-list .tab.active {
+  border-color: #4e54c8;
+  background: #eef0ff;
+  box-shadow: 0 0 0 2px rgba(78, 84, 200, 0.2);
+}
+
+.tab-list .tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.tab-panel.hidden {
+  display: none;
+}
+
+.otp-section {
+  margin-top: 12px;
+}
+
+.otp-hint {
+  font-size: 12px;
+  color: #666666;
+  margin: 4px 0 10px;
+}
+
+.reset-section {
+  margin-top: 16px;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #2e7d32;
+}
+
+.status.error {
+  color: #c62828;
+}
+
+.modal-actions {
+  margin-top: 12px;
 }
 
 .login-footer {
