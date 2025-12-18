@@ -23,12 +23,24 @@
           required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group password-group">
         <label for="password">Mật khẩu</label>
-        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+        <div class="input-wrapper">
+          <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+          <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu" data-target="password">
+            <svg class="eye eye-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 5c-5 0-9 5-9 7s4 7 9 7 9-5 9-7-4-7-9-7Zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5Zm0-8.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5Z"></path>
+            </svg>
+            <svg class="eye eye-closed" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M3.1 4.5 4.5 3.1l17 17-1.4 1.4-2.5-2.5A10.7 10.7 0 0 1 12 19c-5 0-9-5-9-7a8.8 8.8 0 0 1 3.2-4.8L3.1 4.5Zm4.1 4.1a5 5 0 0 0-.7 2.4 5.5 5.5 0 0 0 5.5 5.5 5 5 0 0 0 2.4-.7l-7.2-7.2Zm8.6 4.3-1.5-1.5a3 3 0 0 1-3.6-3.6L8.7 6.8A5 5 0 0 0 7 11c0 2.8 2.2 5 5 5a5 5 0 0 0 3.8-1.7Z"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <button type="submit" class="btn-primary">Đăng nhập</button>
+
+      <button type="button" class="btn-secondary" id="forgot-btn">Quên mật khẩu?</button>
 
       <p class="login-footer">
         Chưa có tài khoản?
@@ -36,6 +48,298 @@
       </p>
     </form>
   </div>
+
+  <div class="modal-backdrop" id="otp-modal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="otp-title">
+      <h2 id="otp-title">Khôi phục mật khẩu</h2>
+      <p class="modal-sub">Nhập email để nhận mã OTP.</p>
+
+      <div class="tab-list" role="tablist">
+        <button type="button" class="tab active" role="tab" aria-selected="true" aria-controls="tab-otp" id="tab-otp-btn">Nhận OTP</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" aria-controls="tab-reset" id="tab-reset-btn" disabled>Đặt lại mật khẩu</button>
+      </div>
+
+      <div class="tab-panel" id="tab-otp" role="tabpanel" aria-labelledby="tab-otp-btn">
+        <div class="form-group">
+          <label for="recover-email">Email</label>
+          <input type="email" id="recover-email" placeholder="nhapemail@example.com" required>
+        </div>
+
+        <button type="button" class="btn-primary" id="send-otp">Gửi mã OTP</button>
+
+        <div class="otp-section hidden" id="otp-section">
+          <div class="form-group">
+            <label for="otp-input">Nhập mã OTP</label>
+            <input type="text" id="otp-input" maxlength="6" inputmode="numeric" placeholder="Ví dụ: 123456">
+          </div>
+          <p class="otp-hint" id="otp-hint"></p>
+          <button type="button" class="btn-primary" id="verify-otp">Xác nhận</button>
+        </div>
+      </div>
+
+      <div class="tab-panel hidden" id="tab-reset" role="tabpanel" aria-labelledby="tab-reset-btn">
+        <div class="reset-section" id="reset-section">
+          <div class="form-group password-group">
+            <label for="new-password">Mật khẩu mới</label>
+            <div class="input-wrapper">
+              <input type="password" id="new-password" placeholder="Nhập mật khẩu mới" required>
+              <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu" data-target="new-password">
+                <svg class="eye eye-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 5c-5 0-9 5-9 7s4 7 9 7 9-5 9-7-4-7-9-7Zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5Zm0-8.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5Z"></path>
+                </svg>
+                <svg class="eye eye-closed" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M3.1 4.5 4.5 3.1l17 17-1.4 1.4-2.5-2.5A10.7 10.7 0 0 1 12 19c-5 0-9-5-9-7a8.8 8.8 0 0 1 3.2-4.8L3.1 4.5Zm4.1 4.1a5 5 0 0 0-.7 2.4 5.5 5.5 0 0 0 5.5 5.5 5 5 0 0 0 2.4-.7l-7.2-7.2Zm8.6 4.3-1.5-1.5a3 3 0 0 1-3.6-3.6L8.7 6.8A5 5 0 0 0 7 11c0 2.8 2.2 5 5 5a5 5 0 0 0 3.8-1.7Z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group password-group">
+            <label for="confirm-password">Nhập lại mật khẩu</label>
+            <div class="input-wrapper">
+              <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
+              <button type="button" class="toggle-password" aria-label="Hiển thị mật khẩu" data-target="confirm-password">
+                <svg class="eye eye-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 5c-5 0-9 5-9 7s4 7 9 7 9-5 9-7-4-7-9-7Zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5Zm0-8.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5Z"></path>
+                </svg>
+                <svg class="eye eye-closed" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M3.1 4.5 4.5 3.1l17 17-1.4 1.4-2.5-2.5A10.7 10.7 0 0 1 12 19c-5 0-9-5-9-7a8.8 8.8 0 0 1 3.2-4.8L3.1 4.5Zm4.1 4.1a5 5 0 0 0-.7 2.4 5.5 5.5 0 0 0 5.5 5.5 5 5 0 0 0 2.4-.7l-7.2-7.2Zm8.6 4.3-1.5-1.5a3 3 0 0 1-3.6-3.6L8.7 6.8A5 5 0 0 0 7 11c0 2.8 2.2 5 5 5a5 5 0 0 0 3.8-1.7Z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="btn-primary" id="reset-password">Đặt lại mật khẩu</button>
+        </div>
+      </div>
+
+      <p class="status" id="otp-status"></p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="close-otp">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggles = document.querySelectorAll('.toggle-password');
+    const forgotBtn = document.getElementById('forgot-btn');
+    const modal = document.getElementById('otp-modal');
+    const sendOtpBtn = document.getElementById('send-otp');
+    const verifyOtpBtn = document.getElementById('verify-otp');
+    const closeOtpBtn = document.getElementById('close-otp');
+    const recoverEmail = document.getElementById('recover-email');
+    const otpSection = document.getElementById('otp-section');
+    const otpInput = document.getElementById('otp-input');
+    const otpHint = document.getElementById('otp-hint');
+    const otpStatus = document.getElementById('otp-status');
+    const tabOtpBtn = document.getElementById('tab-otp-btn');
+    const tabResetBtn = document.getElementById('tab-reset-btn');
+    const tabOtpPanel = document.getElementById('tab-otp');
+    const tabResetPanel = document.getElementById('tab-reset');
+    const resetSection = document.getElementById('reset-section');
+    const newPasswordInput = document.getElementById('new-password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const resetPasswordBtn = document.getElementById('reset-password');
+    const API_BASE = window.location.origin || '';
+    let otpVerified = false;
+    let verifiedEmail = '';
+
+    toggles.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        const isHidden = input.type === 'password';
+
+        input.type = isHidden ? 'text' : 'password';
+        btn.classList.toggle('is-visible', isHidden);
+        btn.setAttribute('aria-label', isHidden ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu');
+      });
+    });
+
+    const setStatus = (message, isError = false) => {
+      otpStatus.textContent = message || '';
+      otpStatus.classList.toggle('error', !!isError);
+    };
+
+    const switchTab = (tab) => {
+      const isOtp = tab === 'otp';
+      tabOtpBtn.classList.toggle('active', isOtp);
+      tabResetBtn.classList.toggle('active', !isOtp);
+      tabOtpBtn.setAttribute('aria-selected', isOtp);
+      tabResetBtn.setAttribute('aria-selected', !isOtp);
+      tabOtpPanel.classList.toggle('hidden', !isOtp);
+      tabResetPanel.classList.toggle('hidden', isOtp);
+      if (isOtp) {
+        tabResetBtn.disabled = true;
+      } else {
+        resetSection.classList.remove('hidden');
+      }
+    };
+
+    tabOtpBtn.addEventListener('click', () => {
+      if (tabOtpBtn.disabled) return;
+      switchTab('otp');
+      recoverEmail.focus();
+    });
+
+    tabResetBtn.addEventListener('click', () => {
+      if (tabResetBtn.disabled || !otpVerified) return;
+      switchTab('reset');
+      newPasswordInput.focus();
+    });
+
+    const openModal = () => {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      setStatus('');
+      otpHint.textContent = '';
+      otpSection.classList.add('hidden');
+      resetSection.classList.add('hidden');
+      otpVerified = false;
+      verifiedEmail = '';
+      otpInput.value = '';
+      newPasswordInput.value = '';
+      confirmPasswordInput.value = '';
+      tabOtpBtn.disabled = false;
+      tabResetBtn.disabled = true;
+      switchTab('otp');
+      recoverEmail.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    };
+
+    forgotBtn.addEventListener('click', openModal);
+    closeOtpBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    sendOtpBtn.addEventListener('click', async () => {
+      const email = recoverEmail.value.trim();
+      if (!email) {
+        setStatus('Vui lòng nhập email.', true);
+        return;
+      }
+
+      setStatus('Đang gửi OTP...');
+      otpSection.classList.add('hidden');
+      otpHint.textContent = '';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/send-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gửi OTP thất bại');
+
+        otpSection.classList.remove('hidden');
+        otpHint.textContent = 'Kiểm tra hộp thư để lấy mã OTP (hết hạn sau 5 phút).';
+        setStatus(data.message || 'Đã gửi OTP.');
+        otpInput.focus();
+        otpVerified = false;
+        verifiedEmail = email;
+      } catch (err) {
+        setStatus(err.message, true);
+      }
+    });
+
+    verifyOtpBtn.addEventListener('click', async () => {
+      const email = recoverEmail.value.trim();
+      const otp = otpInput.value.trim();
+
+      if (!email) {
+        setStatus('Vui lòng nhập email.', true);
+        return;
+      }
+
+      if (!otp) {
+        setStatus('Vui lòng nhập mã OTP.', true);
+        return;
+      }
+
+      setStatus('Đang xác nhận...');
+
+      try {
+        const res = await fetch(`${API_BASE}/api/verify-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, otp }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Xác nhận OTP thất bại');
+
+        setStatus(data.message || 'Xác nhận thành công.');
+        otpVerified = true;
+        verifiedEmail = email;
+        tabOtpBtn.disabled = true;
+        tabResetBtn.disabled = false;
+        switchTab('reset');
+        resetSection.classList.remove('hidden');
+        newPasswordInput.focus();
+      } catch (err) {
+        setStatus(err.message, true);
+      }
+    });
+
+    resetPasswordBtn.addEventListener('click', async () => {
+      const email = verifiedEmail || recoverEmail.value.trim();
+      const newPassword = newPasswordInput.value.trim();
+      const confirmPassword = confirmPasswordInput.value.trim();
+
+      if (!otpVerified) {
+        setStatus('Cần xác thực OTP trước.', true);
+        return;
+      }
+
+      if (!newPassword || !confirmPassword) {
+        setStatus('Vui lòng nhập đủ mật khẩu mới.', true);
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        setStatus('Mật khẩu mới phải từ 6 ký tự.', true);
+        return;
+      }
+
+      const hasUpper = /[A-Z]/.test(newPassword);
+      const hasDigit = /\d/.test(newPassword);
+
+      if (newPassword.length < 8 || !hasUpper || !hasDigit) {
+        setStatus('Mật khẩu phải >= 8 ký tự, có ít nhất 1 chữ hoa và 1 chữ số.', true);
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        setStatus('Mật khẩu nhập lại không khớp.', true);
+        return;
+      }
+
+      setStatus('Đang đặt lại mật khẩu...');
+
+      try {
+        const res = await fetch(`${API_BASE}/api/reset-password`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, newPassword }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Đặt lại mật khẩu thất bại');
+
+        setStatus(data.message || 'Đặt lại mật khẩu thành công.');
+      } catch (err) {
+        setStatus(err.message, true);
+      }
+    });
+  </script>
 </body>
 </html>
 

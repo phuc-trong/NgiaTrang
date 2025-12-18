@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "live-server --port=3000 --entry-file=login.html"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "static": "live-server --port=3000 --entry-file=login.html"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.8"
   },
   "description": "",
   "main": "index.js",
